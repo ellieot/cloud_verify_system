@@ -1,0 +1,113 @@
+/*官网首页的css*/
+
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background: #2B2B2B;
+    font-family: '微软雅黑';
+    background-image: url(/Public/image/managesoft.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    overflow: hidden;
+
+}
+div.container {
+	color: #7b7b7b;
+    text-align: center;
+    left: 50%;
+    right: 50%;
+}
+div.logo{
+    float: left;
+    height: 50px;
+    padding-left: 80px;
+}
+div.logo img {
+    margin-top: 10px;
+    height: 30px;
+}
+ul{
+    float: right;
+    height: 50px;
+    line-height: 50px;
+    padding-right: 80px;
+}
+ul li{
+    float: left;
+    list-style: none;
+    padding-left: 20px;
+    padding-right: 20px;
+
+}
+div.banner{
+    padding-top: 50px;
+}
+div.banner-left{
+    height: 350px;
+    width: 50%;
+}
+div.banner-left div{
+    padding: 60px 70px 0 70px;
+}
+div.banner-left h1 {
+    color: #5089be;
+    font-size: 3.3em;
+    display: inline-block;
+    letter-spacing: 2px;
+    margin-bottom: 14px;
+    display: block;
+}
+
+div.banner-left p{
+    color: #7b7b7b;
+    font-size: 18px;
+    line-height: 1.9em;
+    margin-top: 1.7em;
+}
+a.begin{
+    background-color: #2b2b2b;
+    text-decoration: none;
+    color: #000;
+    font-size: 16px;
+    font-weight: 700;
+    outline: none;
+    padding: 15px 45px;
+    border: 2px solid #2f2f2f;
+    border-radius: 2.3em;
+    -webkit-border-radius: 2.3em;
+    margin-top: 50px;
+    display: inline-block;
+    
+}
+a.begin:hover {
+    color: #428bca;
+    border: 2px solid #428bca;
+}
+div.bottom{
+    float: left;
+    width: 100%;
+    height: 80px;
+    line-height: 80px;
+    text-align: center;
+    color: #7b7b7b;
+    font-weight: 400;
+}
+div.bottom a{
+    background-color: #2b2b2b;
+    text-decoration: none;
+    color: #000;
+    font-size: 16px;
+    font-weight: 400;
+    outline: none;
+    padding: 15px 35px;
+    border: 2px solid #2f2f2f;
+    border-radius: 2em;
+    -webkit-border-radius: 2em;
+    margin-bottom: 40px;
+}
+div.bottom a:hover{
+    color: #428bca;
+    border: 2px solid #428bca;
+}

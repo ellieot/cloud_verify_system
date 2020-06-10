@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <title>网络验证系统</title>
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    <link rel="stylesheet" href="/Public/css/a100e2e6.app.css">
+    <link rel="stylesheet" href="/Public/css/common.css">
+    <script src="/Public/js/jquery-1.9.1.min.js"></script>
+    <script src="/Public/js/bootstrap.min.js"></script>
+    <script src="/Public/js/common.js"></script>
+</head>
+<style>
+div.form-group{
+    margin-bottom: 8px;
+}
+.right-container1 {
+    margin-left: 160px;
+    padding: 20px 30px 0px 20px;
+}
+</style>
+<body>
+
+<include file="Application/Home/View/Common/Navigation.html"/>
+<include file="Application/Home/View/Common/Sidebar.html"/>
+
+
+
+
+
+<div class="right-container1" name="bbb">
+            <div class="form-group">
+            <label class="control-label ng-scope">模式选择</label>
+            <div class="custom-form-inline custom-form-horizontal-form">
+                <div class="radio custom-control">
+                    <label>
+                        <input type="radio" value="0" onchange ="change();" class="ng-pristine ng-valid" name="authmode" {$authmode0}>
+                        <span class="control-indicator"></span>
+                        网络验证
+                    </label>
+                </div>
+                <div class="radio custom-control">
+                    <label>
+                        <input type="radio" value="1" onchange ="change();" class="ng-pristine ng-valid" name="authmode" {$authmode1}>
+                        <span class="control-indicator"></span>
+                        引流加群
+                    </label>
+                </div>
+            </div>
+        </div>
+</div>
+
+
+
+
+<!--网络验证-->
+<div class="right-container" name="aaa" style="display:block;">
+<form method="get">
+        <input type="text" hidden="hidden" name="auth" value="{$auth}">
+        <input type="text" hidden="hidden" name="authmode" value="0">
+        <input type="text" hidden="hidden" name="sid" value="{$sid}">
+        <label>软件名称</label>
+        <div class="form-group input-group-half">
+            <input type="text" class="form-control" name="software" value="{$software}" placeholder="请输入软件名">
+        </div>
+        <label>试用分钟</label>
+        <div class="form-group input-group-half"  >
+            <input type="text" class="form-control" name="try_minutes" value="{$try_minutes}" placeholder="填0代表不可试用">
+        </div>
+        <label>试用次数</label>
+        <div class="form-group input-group-half" >
+            <input type="text" class="form-control" name="try_count" value="{$try_count}" placeholder="填0代表不可试用">
+        </div>
+        <div class="form-group" >
+            <label class="control-label ng-scope">绑机多开模式</label>
+            <div class="custom-form-inline custom-form-horizontal-form">
+                <div class="radio custom-control">
+                    <label>
+                        <input type="radio" value="0" class="ng-pristine ng-valid" name="bindmode" {$bindmode0}>
+                        <span class="control-indicator"></span>
+                        绑机单开
+                    </label>
+                </div>
+                <div class="radio custom-control">
+                    <label>
+                        <input type="radio" value="1" class="ng-pristine ng-valid" name="bindmode" {$bindmode1}>
+                        <span class="control-indicator"></span>
+                        绑机多开
+                    </label>
+                </div>
+                <div class="radio custom-control">
+                    <label>
+                        <input type="radio" value="2" class="ng-pristine ng-valid" name="bindmode" {$bindmode2}>
+                        <span class="control-indicator"></span>
+                        不绑机多开
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label ng-scope">用户解绑模式</label>
+            <div class="custom-form-inline custom-form-horizontal-form">
+                <div class="radio custom-control">
+                    <label>
+                        <input type="radio" value="0" class="ng-pristine ng-valid" name="unbindmode" {$unbindmode0}>
+                        <span class="control-indicator"></span>
+                        允许解绑
+                    </label>
+                </div>
+                <div class="radio custom-control">
+                    <label>
+                        <input type="radio" value="1" class="ng-pristine ng-valid" name="unbindmode" {$unbindmode1}>
+                        <span class="control-indicator"></span>
+                        不允许解绑
+                    </label>
+                </div>
+            </div>
+        </div>
+         <div class="form-group">
+            <label class="control-label ng-scope">验证是否开启试用</label>
+            <div class="custom-form-inline custom-form-horizontal-form">
+                <div class="radio custom-control">
+                    <label>
+                        <input type="radio" value="0" class="ng-pristine ng-valid" name="sy" {$sy0}>
+                        <span class="control-indicator"></span>
+                        开启
+                    </label>
+                </div>
+                <div class="radio custom-control">
+                    <label>
+                        <input type="radio" value="1" class="ng-pristine ng-valid" name="sy" {$sy1}>
+                        <span class="control-indicator"></span>
+                        关闭
+                    </label>
+                </div>
+            </div>
+        </div>
+         <div class="form-group">
+            <label class="control-label ng-scope">验证是否开启发卡网</label>
+            <div class="custom-form-inline custom-form-horizontal-form">
+                <div class="radio custom-control">
+                    <label>
+                        <input type="radio" value="0" class="ng-pristine ng-valid" name="web" {$web0}>
+                        <span class="control-indicator"></span>
+                        开启
+                    </label>
+                </div>
+                <div class="radio custom-control">
+                    <label>
+                        <input type="radio" value="1" class="ng-pristine ng-valid" name="web" {$web1}>
+                        <span class="control-indicator"></span>
+                        关闭
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label ng-scope">弹窗模式</label>
+            <div class="custom-form-inline custom-form-horizontal-form">
+                <div class="radio custom-control">
+                    <label>
+                        <input type="radio" value="0" class="ng-pristine ng-valid" name="model" {$model0}>
+                        <span class="control-indicator"></span>
+                        验证模式
+                    </label>
+                </div>
+                <div class="radio custom-control">
+                    <label>
+                        <input type="radio" value="1" class="ng-pristine ng-valid" name="model" {$model1}>
+                        <span class="control-indicator"></span>
+                        公告模式
+                    </label>
+                </div>
+                <div class="radio custom-control">
+                    <label>
+                        <input type="radio" value="2" class="ng-pristine ng-valid" name="model" {$model2}>
+                        <span class="control-indicator"></span>
+                        验证+公告模式
+                    </label>
+                </div>
+            </div>
+        </div>
+        <label>弹窗标题</label>
+        <div class="form-group input-group-half">
+            <input type="text" class="form-control" name="title" value="{$title}" placeholder="弹窗标题">
+        </div>
+         <label>输入框提示信息</label>
+        <div class="form-group input-group-half">
+            <input type="text" class="form-control" name="edit" value="{$edit}" placeholder="">
+        </div>
+          <label>验证提示内容</label>
+        <div class="form-group input-group-half">
+                    <textarea class="form-control ng-pristine ng-valid" rows="4" name="hint">{$hint}</textarea>
+        </div>
+         <label>发卡网地址</label>
+        <div class="form-group input-group-half">
+            <input type="text" class="form-control" name="weburl" value="{$weburl}" placeholder="发卡网地址">
+        </div>
+        <label>软件版本</label>
+        <div class="form-group input-group-half">
+            <input type="text" class="form-control" name="version" value="{$version}" placeholder="请输入非负整数">
+        </div>
+        <label>更新地址</label>
+        <div class="form-group input-group-half">
+            <input type="text" class="form-control" name="update_url" value="{$update_url}" placeholder="请输入url地址">
+        </div>
+        <label>更新提示内容</label>
+        <div class="form-group input-group-half">
+                    <textarea class="form-control ng-pristine ng-valid" rows="4" name="updatamsg">{$updatamsg}</textarea>
+        </div>
+        <div class="form-group">
+            <label class="control-label ng-scope">更新模式</label>
+            <div class="custom-form-inline custom-form-horizontal-form">
+                <div class="radio custom-control">
+                    <label>
+                        <input type="radio" value="0" class="ng-pristine ng-valid" name="updatemode" {$updatemode0}>
+                        <span class="control-indicator"></span>
+                        不强制更新
+                    </label>
+                </div>
+                <div class="radio custom-control">
+                    <label>
+                        <input type="radio" value="1" class="ng-pristine ng-valid" name="updatemode" {$updatemode1}>
+                        <span class="control-indicator"></span>
+                        强制更新
+                    </label>
+                </div>
+            </div>
+        </div>
+        <label>弹窗公告</label>
+        <div class="form-group input-group-half ng-scope">
+        <textarea class="form-control ng-pristine ng-valid" rows="4" name="info">{$info}</textarea>
+        </div>
+        <div class="form-group">
+            <label class="control-label ng-scope">软件状态改变</label>
+            <div class="custom-form-inline custom-form-horizontal-form">
+                <div class="radio custom-control">
+                    <label>
+                        <input type="radio" value="0" class="ng-pristine ng-valid" name="frozen" {$frozen0}>
+                        <span class="control-indicator"></span>
+                        运营
+                    </label>
+                </div>
+                <div class="radio custom-control">
+                    <label>
+                        <input type="radio" value="1" class="ng-pristine ng-valid" name="frozen" {$frozen1}>
+                        <span class="control-indicator"></span>
+                        停用
+                    </label>
+                </div>
+            </div>
+        </div>
+        <button type="submit" name="submit" class="btn btn-primary">{$buttonTitle}</button>
+    </form>
+</div>
+
+
+
+
+
+<!--加群引流-->
+<div class="right-container" name="aaa" style="display:none;">
+<form method="get">
+        <input type="text" hidden="hidden" name="auth" value="{$auth}">
+        <input type="text" hidden="hidden" name="authmode" value="1">
+        <input type="text" hidden="hidden" name="sid" value="{$sid}">
+        <label>软件名称</label>
+        <div class="form-group input-group-half">
+            <input type="text" class="form-control" name="software" value="{$software}" placeholder="请输入软件名">
+        </div>
+        <label>弹窗标题</label>
+        <div class="form-group input-group-half">
+            <input type="text" class="form-control" name="title" value="{$title}" placeholder="弹窗标题">
+        </div>
+        <label>弹窗信息</label>
+        <div class="form-group input-group-half ng-scope">
+        <textarea class="form-control ng-pristine ng-valid" rows="4" name="msg">{$msg}</textarea>
+        </div>
+        <label>弹窗次数 暂时不支持</label>
+        <div class="form-group input-group-half">
+            <input type="text" onkeyup="this.value=this.value.replace(/\D/g,'')" class="form-control" name="count" value="{$count}" placeholder="0-x">
+        </div>
+        <!--<label>弹窗字体颜色</label>-->
+        <div class="form-group input-group-half" style="display: none;">
+            <input type="color" class="form-control" name="color" value="{$color}">
+        </div>
+        <label>首次安装多久显示 暂时不支持</label>
+        <div class="form-group input-group-half">
+            <input type="text" onkeyup="this.value=this.value.replace(/\D/g,'')" class="form-control" name="starttime" value="{$starttime}" placeholder="填0代表安装就显示">
+        </div>
+        <label>引流QQ</label>
+        <div class="form-group input-group-half">
+            <input type="text" onkeyup="this.value=this.value.replace(/\D/g,'')" class="form-control" name="qq" value="{$qq}">
+        </div>
+        <label>引流QQ群key</label><a class='underline' target="_blank" href="https://qun.qq.com/join.html">(申请QQ群Key)</a>
+        <div class="form-group input-group-half">
+            <input type="text" class="form-control" name="groupkey" value="{$groupkey}">
+        </div>
+        <div class="form-group">
+            <label class="control-label ng-scope">是否开启加群</label>
+            <div class="custom-form-inline custom-form-horizontal-form">
+                <div class="radio custom-control">
+                    <label>
+                        <input type="radio" value="0" class="ng-pristine ng-valid" name="group" {$group0}>
+                        <span class="control-indicator"></span>
+                        开启
+                    </label>
+                </div>
+                <div class="radio custom-control">
+                    <label>
+                        <input type="radio" value="1" class="ng-pristine ng-valid" name="group" {$group1}>
+                        <span class="control-indicator"></span>
+                        关闭
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label ng-scope">是否开启客服QQ</label>
+            <div class="custom-form-inline custom-form-horizontal-form">
+                <div class="radio custom-control">
+                    <label>
+                        <input type="radio" value="0" class="ng-pristine ng-valid" name="qqon" {$qqon0}>
+                        <span class="control-indicator"></span>
+                        开启
+                    </label>
+                </div>
+                <div class="radio custom-control">
+                    <label>
+                        <input type="radio" value="1" class="ng-pristine ng-valid" name="qqon" {$qqon1}>
+                        <span class="control-indicator"></span>
+                        关闭
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label ng-scope">软件状态改变</label>
+            <div class="custom-form-inline custom-form-horizontal-form">
+                <div class="radio custom-control">
+                    <label>
+                        <input type="radio" value="0" class="ng-pristine ng-valid" name="frozen" {$frozen0}>
+                        <span class="control-indicator"></span>
+                        运营
+                    </label>
+                </div>
+                <div class="radio custom-control">
+                    <label>
+                        <input type="radio" value="1" class="ng-pristine ng-valid" name="frozen" {$frozen1}>
+                        <span class="control-indicator"></span>
+                        停用
+                    </label>
+                </div>
+            </div>
+        </div>
+        <button type="submit" name="submit" class="btn btn-primary">{$buttonTitle}</button>
+        
+ </form>
+</div>
+</div>
+
+
+<script type ="text/javascript">
+  window.onload = function () {
+        var radio =document.getElementsByName("authmode");
+        radio[0].checked="true";
+        //radio.style.display="none";
+        
+        var b = document.getElementsByName("bbb");
+        var a =document.getElementsByName("aaa");
+        var x = document.getElementsByName("auth");
+        var i;
+        for (i = 0; i < x.length; i++) {
+            if (x[i].value == '0') {
+                b[0].style.display="none";
+                radio[0].checked="true";
+                a[0].style.display="block";
+                a[1].style.display="none";
+                a[2].style.display="none";
+                a[3].style.display="none";
+                a[4].style.display="none";
+            } else if (x[i].value == '1') {
+                b[0].style.display="none";
+                radio[1].checked="true";
+                a[1].style.display="block";
+                a[0].style.display="none";
+                a[2].style.display="none";
+                a[3].style.display="none";
+                a[4].style.display="none";
+            } else if(x[i].value == '2'){
+                b[0].style.display="none";
+                radio[2].checked="true";
+                a[2].style.display="block";
+                a[0].style.display="none";
+                a[1].style.display="none";
+                a[3].style.display="none";
+                a[4].style.display="none";
+            }else if(x[i].value == '3'){
+                b[0].style.display="none";
+                radio[3].checked="true";
+                a[3].style.display="block";
+                a[0].style.display="none";
+                a[1].style.display="none";
+                a[2].style.display="none";
+                a[4].style.display="none";
+            }else if(x[i].value == '4'){
+                b[0].style.display="none";
+                radio[4].checked="true";
+                a[4].style.display="block";
+                a[0].style.display="none";
+                a[1].style.display="none";
+                a[2].style.display="none";
+                a[3].style.display="none";
+            }
+        }
+    };
+    
+  function change()
+  {
+   var radio =document.getElementsByName("authmode");
+   var radioLength = radio.length;
+   for(var i =0;i < radioLength;i++)
+   {
+    if(radio[i].checked)
+    {
+     var radioValue = radio[i].value;
+     var a =document.getElementsByName("aaa");
+     //alert(a.length+radioValue);
+     if(radioValue==0)
+     {
+     a[0].style.display="block";
+     a[1].style.display="none";
+     a[2].style.display="none";
+     a[3].style.display="none";
+     a[4].style.display="none";
+     }
+     if(radioValue==1)
+     {
+     a[1].style.display="block";
+     a[0].style.display="none";
+     a[2].style.display="none";
+     a[3].style.display="none";
+     a[4].style.display="none";
+     }
+    }
+   }
+  }
+  </script>
+  <script type="text/javascript" color="255,0,255" opacity='0.7' zIndex="-2" count="99" src="/Public/js/a.js"></script>
+
+</body>
+</html>

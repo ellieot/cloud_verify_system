@@ -1,0 +1,58 @@
+<div class="left-container">
+    <ul class="nav sidenav" style="margin-top:-15px">
+        <li>
+            <a class="disable" href="javascript:void(0)">商户信息 </a>
+            <ul class="nav">
+                <li>
+                    <a class="{$home_selected}" href="/Home">商户概况 </a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a class="disable" href="javascript:void(0)">软件提卡 </a>
+            <ul class="nav">
+                <li>
+                    <a class="{$managesoft_selected}" href="/Home/managesoft">软件管理 </a>
+                </li>
+                <li>
+                    <a class="{$createcode_selected}" href="/Home/createcode">生成注册码 </a>
+                </li>
+                <li>
+                    <a class="{$managecode_selected}" href="/Home/managecode">注册码管理</a>
+                </li>
+                <li>
+                    <a class="{$batchopera_selected}" href="/Home/batchopera">批量操作</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a class="disable" href="javascript:void(0)">商业授权 </a>
+            <ul class="nav">
+                <li>
+                    <a class="{$vip_selected}" href="/Home/vip">开通VIP授权</a>
+                    <a name="admin" class="{$admin_selected}" href="/Home/Admin">用户审核</a>
+                    <a name="gg" class="{$gg_selected}" href="/Home/gg">发布公告</a>
+                    <script>
+                           var a =  '{$username}';
+                           if(a!="admin123")
+                            {
+                              var aa =document.getElementsByName("admin");
+                              aa[0].style.display="none";
+                              
+                              var ab =document.getElementsByName("gg");
+                              ab[0].style.display="none";
+                            }
+                    </script>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a class="disable" href="javascript:void(0)">反馈 </a>
+            <ul class="nav">
+                <li>
+                    <a class="{$contact_selected}" href="/Home/contact">联系我们</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>

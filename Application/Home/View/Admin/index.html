@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <title>网络验证系统</title>
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    <link rel="stylesheet" href="/Public/css/a100e2e6.app.css">
+    <link rel="stylesheet" href="/Public/css/common.css">
+    <script src="/Public/js/jquery-1.9.1.min.js"></script>
+    <script src="/Public/js/bootstrap.min.js"></script>
+</head>
+<style>
+    .right-container form.form {
+        width: 850px;
+    }
+
+    .topdiv {
+        width: 100%;
+        height: 74px;
+    }
+
+    .zhucema {
+        width: 288px;
+        float: left;
+        margin-right: 10px;
+    }
+
+    .timechoose {
+        margin-bottom: 12px;
+        float: left;
+    }
+
+    .timechoose label {
+        display: block;
+    }
+
+    .timechoose input {
+        margin-bottom: 5px;
+        margin-right: 2px;
+        height: 34px;
+        padding: 6px 10px;
+        font-size: 14px;
+        line-height: 1.42857143;
+        color: #555;
+        background-color: #fff;
+        background-image: none;
+        border: 1px solid #d0d0d0;
+        border-radius: 4px;
+        box-shadow: inset 0 1 p
+    }
+
+    .timechoose input.fromtime {
+        margin-left: 5px;
+    }
+
+    .topdiv button {
+        float: right;
+        margin-top: 25px;
+    }
+
+    .middlediv {
+        width: 100%;
+        height: 74px;
+    }
+
+    .software {
+        width: 240px;
+        float: left;
+        margin-right: 10px;
+    }
+
+    .alltime {
+        float: left;
+    }
+
+    .alltime input.form-control {
+        width: 80px;
+    }
+
+    .alltime span {
+        width: 100px;
+    }
+
+    div.unuse, div.online, div.expire {
+        float: left;
+        margin-left: 20px;
+    }
+
+    div.unuse label, div.online label, div.expire label {
+        display: block;
+    }
+
+    div.checkbox {
+        margin-top: 6px;
+        float: left;
+    }
+
+    .checkbox + .checkbox {
+        margin-left: 8px;
+        margin-top: 6px;
+    }
+
+    .custom-control {
+        padding-left: 18px;
+    }
+
+    .right-container button {
+        margin-bottom: 10px;
+        display: block;
+    }
+
+    .right-container table {
+        width: 100%;
+    }
+
+    .right-container table th {
+        height: 35px;
+        background: #f7f7f7;
+        color: #666;
+        text-align: center;
+    }
+
+    .right-container table td {
+        height: 30px;
+        color: #999;
+        text-align: center;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .right-container table td.opera div {
+        width: 104px;
+        height: 36px;
+        margin: 0 auto;
+    }
+
+    .right-container table td button {
+        float: left;
+        margin-bottom: 0;
+        margin-top: 3px;
+    }
+  
+    .right-container table td button:nth-child(2) {
+        margin-left: 12px;
+    }
+
+    .pagination:nth-child(2) {
+        margin-left: 12px;
+    }
+
+    nav.page {
+        width: 100%;
+        height: 79px;
+        text-align: center;
+    }
+    td.codemark {
+        max-width: 100px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+    button.exportbtn {
+        float: right;
+        margin-right: 10px;
+        margin-bottom: 10px;
+    }
+</style>
+<body>
+
+<include file="Application/Home/View/Common/Navigation.html"/>
+<include file="Application/Home/View/Common/Sidebar.html"/>
+
+<div class="right-container">
+
+ 
+    <table>
+        <th>用户名</th>
+        <th>注册时间</th>
+        <th>最近登录时间</th>
+        <th>登录次数</th>
+        <th>上次登录IP</th>
+        <th>是否是Vip</th>
+        <th>Vip授权操作</th>
+        <th>管理</th>
+        <volist name="list" id="vo">
+            <tr>
+                <td>{$vo.username}</td>
+                <td>{$vo.reg_time}</td>
+                <td>{$vo.lastlogin_time}</td>
+                <td>{$vo.login_count}</td>
+                <td>{$vo.lastlogin_ip}</td>
+                <td class="vip">{$vo.vip}</td>
+                <td class="opera">
+                    <div>
+                        <button type="button" class="btn btn-default btn-sm" onclick="window.location.href='/Home/admin?vip={$vo.username}'">授权</button>
+                        <button type="button" class="btn btn-danger btn-sm" onclick="del('{$vo.username}')">取消</button>
+                    </div>
+                </td>
+               <td class="opera">
+                    <div>
+                        <button type="button" class="btn btn-danger btn-sm" onclick="del2('{$vo.username}')">删除</button>
+                        <button type="button" class="btn btn-danger btn-sm" onclick="xgpass('{$vo.username}')">改密</button>
+                    </div>
+                </td>
+            </tr>
+        </volist>
+    </table>
+    <nav class="page">
+        <div>
+            <ul class="pagination">
+                {$firstbtn}
+                {$pagelist}
+                {$lastbtn}
+            </ul>
+            <ul class="pagination">
+                {$prevbtn}
+                {$nextbtn}
+            </ul>
+        </div>
+    </nav>
+</div>
+<script type="text/javascript" color="255,0,255" opacity='0.7' zIndex="-2" count="99" src="/Public/js/a.js"></script>
+
+</body>
+<script>
+    function del(name) {
+        if (confirm('确定要取消Vip授权吗?')) {
+            window.location.href='/Home/admin?novip=' + name;
+        }
+    }
+    function del2(name) {
+        if (confirm('确定要删除'+name+'?')) {
+            window.location.href='/Home/admin?del=' + name;
+        }
+    }
+    function xgpass(name) {
+            var pass = prompt("请输入新的密码","");
+            if(pass)
+            {
+              window.location.href='/Home/admin?xgpass=' + name+'&newpass='+pass;
+            }
+    }
+    $('.softname_btn').click(function () {
+        $('.softname-input').val($(this).text());
+    });
+    $('.softname_btn_unchoose').click(function () {
+        $('.softname-input').val('');
+    });
+
+    window.onload = function () {
+        var x = document.getElementsByClassName("vip");
+        var i;
+        for (i = 0; i < x.length; i++) {
+            if (x[i].innerText == '1') {
+                x[i].innerText = '是';
+            } else {
+                x[i].innerText = '否';
+            }
+        }
+    };
+</script>
+
+
+
+</html>
